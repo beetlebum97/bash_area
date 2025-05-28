@@ -1,7 +1,7 @@
 # 🖥️ INFO SISTEMA 
 Script interactivo para obtener información detallada de sistemas Linux.  
 
-[![Script Preview](https://github.com/beetlebum97/bash_area/blob/main/info_sistema_menu.png)]()
+[![Script Preview](https://github.com/beetlebum97/bash_area/blob/main/menu.png)]()
 
 ---
 
