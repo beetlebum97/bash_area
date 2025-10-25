@@ -1,15 +1,16 @@
 # 🖥️ 1. INFO SISTEMA 
 Script interactivo para obtener información detallada de sistemas Linux.  
 
-[![Script Preview](https://github.com/beetlebum97/bash_area/blob/main/menu.png)]()
+[![Script Preview](https://raw.githubusercontent.com/beetlebum97/bash_area/main/screenshoots/sistema-info.png)]()
 
 ## 🔍 Funcionalidades  
 - Menú interactivo con opciones numeradas.  
 - Información categorizada por color:  
   - 🟡 **Sistema (1-9):** Hostname, versión kernel, usuarios activos, etc.  
   - 🔵 **Hardware (10-17):** BIOS, placa base, CPU, memorias USB.  
-  - 🟢 **Red (18-21):** Interfaces de red, conexiones activas.  
-  - 🔴 **Salir (22):** Cierra el script.  
+  - 🟢 **Red (18-21):** Interfaces de red, conexiones activas.
+  - 🔴 **Salir (22):** Guardar informe completo en archivo.    
+  - 🔴 **Salir (23):** Cierra el script.  
 
 ## ⚙️ Requisitos  
 - **Sistemas basados en Linux** (probado en Debian 12).  
@@ -22,7 +23,7 @@ Script interactivo para obtener información detallada de sistemas Linux.
 
 # 🖥️ 2. CONF SISTEMA 
 Script interactivo para obtener la configuración de sistemas Linux.  
-[![Script Preview](https://github.com/beetlebum97/bash_area/blob/main/menu_conf.png)]()
+[![Script Preview](https://raw.githubusercontent.com/beetlebum97/bash_area/main/screenshoots/sistema-conf.png)]()
 
 ## 🔍 Funcionalidades  
 - Menú interactivo con opciones numeradas.  
@@ -37,7 +38,7 @@ Script interactivo para obtener la configuración de sistemas Linux.
 
  # 🖥️ 3. ANÁLISIS ARCHIVOS 
 Script interactivo para obtener listados de archivos y directorios por tamaño y fecha.  
-[![Script Preview](https://github.com/beetlebum97/bash_area/blob/main/menu_archivos.png)]()
+[![Script Preview](https://raw.githubusercontent.com/beetlebum97/bash_area/main/screenashoots/archivos.png)]()
 
 ## 🔍 Funcionalidades  
 - Menú interactivo con opciones numeradas.  

@@ -49,7 +49,7 @@ function mostrar_menu {
     echo -e "${Morado}┃                                                              ┃${NC}"
 
     # Sección Sistema
-    echo -e "${Morado}┃  ${VerdeClaro}${Negrita}🖥️  INFORMACIÓN DEL SISTEMA${NC}                                  ${Morado}┃${NC}"
+    echo -e "${Morado}┃  ${Amarillo}${Negrita}🖥️  INFORMACIÓN DEL SISTEMA${NC}                                  ${Morado}┃${NC}"
     echo -e "${Morado}┃  ${NC}  ${Amarillo}[1]${NC}  Sistema Operativo     ${Amarillo}[2]${NC}  Kernel                    ${Morado}┃${NC}"
     echo -e "${Morado}┃  ${NC}  ${Amarillo}[3]${NC}  Shell                 ${Amarillo}[4]${NC}  Hostname                  ${Morado}┃${NC}"
     echo -e "${Morado}┃  ${NC}  ${Amarillo}[5]${NC}  Terminal              ${Amarillo}[6]${NC}  Idioma                    ${Morado}┃${NC}"
@@ -58,7 +58,7 @@ function mostrar_menu {
     echo -e "${Morado}┃                                                              ┃${NC}"
 
     # Sección Hardware
-    echo -e "${Morado}┃  ${AzulClaro}${Negrita}⚙️  HARDWARE${NC}                                                 ${Morado}┃${NC}"
+    echo -e "${Morado}┃  ${CianClaro}${Negrita}⚙️  HARDWARE${NC}                                                 ${Morado}┃${NC}"
     echo -e "${Morado}┃  ${NC}  ${CianClaro}[10]${NC} Arquitectura          ${CianClaro}[11]${NC} BIOS                      ${Morado}┃${NC}"
     echo -e "${Morado}┃  ${NC}  ${CianClaro}[12]${NC} Placa Base            ${CianClaro}[13]${NC} CPU                       ${Morado}┃${NC}"
     echo -e "${Morado}┃  ${NC}  ${CianClaro}[14]${NC} Memoria               ${CianClaro}[15]${NC} Discos                    ${Morado}┃${NC}"
@@ -66,14 +66,15 @@ function mostrar_menu {
     echo -e "${Morado}┃                                                              ┃${NC}"
 
     # Sección Red
-    echo -e "${Morado}┃  ${Verde}${Negrita}🌐 CONECTIVIDAD${NC}                                             ${Morado}┃${NC}"
+    echo -e "${Morado}┃  ${Verdeclaro}${Negrita}🌐 CONECTIVIDAD${NC}                                             ${Morado}┃${NC}"
     echo -e "${Morado}┃  ${NC}  ${VerdeClaro}[18]${NC} Interfaces de Red     ${VerdeClaro}[19]${NC} IP Privada                ${Morado}┃${NC}"
     echo -e "${Morado}┃  ${NC}  ${VerdeClaro}[20]${NC} IP Pública            ${VerdeClaro}[21]${NC} Dirección MAC             ${Morado}┃${NC}"
     echo -e "${Morado}┃                                                              ┃${NC}"
 
-    # Opción de salida
+    # Opción de guardar todo y salir
     echo -e "${Morado}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${NC}"
-    echo -e "${Morado}┃  ${RojoClaro}${Negrita}[22] 🚪 Salir del programa${NC}                                  ${Morado}┃${NC}"
+    echo -e "${Morado}┃  ${RojoClaro}${Negrita}[22] 💾 Guardar informe completo en archivo${NC}                 ${Morado}┃${NC}"
+    echo -e "${Morado}┃  ${RojoClaro}${Negrita}[23] 🚪 Salir del programa${NC}                                  ${Morado}┃${NC}"
     echo -e "${Morado}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${NC}"
     echo ""
 }
@@ -97,16 +98,188 @@ function mostrar_encabezado_seccion {
 
 # Leer la opción del usuario con validación
 function leer_opcion {
-    echo -ne "${Cian}${Negrita}➤ Selecciona una opción [1-22]: ${NC}"
+    echo -ne "${Cian}${Negrita}➤ Selecciona una opción [1-23]: ${NC}"
     read opcion
 
     # Validar que sea un número
-    if ! [[ "$opcion" =~ ^[0-9]+$ ]] || [ "$opcion" -lt 1 ] || [ "$opcion" -gt 22 ]; then
-        echo -e "${Rojo}❌ Opción inválida. Por favor, introduce un número entre 1 y 22.${NC}"
+    if ! [[ "$opcion" =~ ^[0-9]+$ ]] || [ "$opcion" -lt 1 ] || [ "$opcion" -gt 23 ]; then
+        echo -e "${Rojo}❌ Opción inválida. Por favor, introduce un número entre 1 y 23.${NC}"
         sleep 2
         return 1
     fi
     return 0
+}
+
+# Función para ejecutar todas las opciones y guardar en archivo
+function ejecutar_todo_y_guardar {
+    local archivo="informe_sistema_completo_$(date +%Y%m%d_%H%M%S).txt"
+    
+    mostrar_encabezado_seccion "EJECUTANDO TODAS LAS OPCIONES Y GUARDANDO EN ARCHIVO" "${CianClaro}"
+    echo -e "${Verde}Generando informe completo del sistema...${NC}"
+    echo -e "${GrisClaro}Archivo: $archivo${NC}"
+    echo ""
+    
+    # Crear archivo con encabezado
+    {
+        echo "==================================================="
+        echo "    INFORME COMPLETO DEL SISTEMA"
+        echo "    Generado: $(date)"
+        echo "    Sistema: $(cat /etc/*release | grep PRETTY_NAME | cut -d '=' -f 2 | sed 's/"//g')"
+        echo "==================================================="
+        echo ""
+    } > "$archivo"
+    
+    # Ejecutar cada opción y guardar en archivo
+    for i in {1..21}; do
+        case $i in
+            1)
+                echo "=== SISTEMA OPERATIVO ===" >> "$archivo"
+                cat /etc/*release | grep PRETTY_NAME | cut -d '=' -f 2 | awk '{$1=$1};1' | sed 's/"//g' >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            2)
+                echo "=== KERNEL ===" >> "$archivo"
+                uname -a >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            3)
+                echo "=== SHELL ===" >> "$archivo"
+                echo "Shell actual: $SHELL" >> "$archivo"
+                $SHELL --version | head -n1 >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            4)
+                echo "=== HOSTNAME ===" >> "$archivo"
+                echo "Nombre del equipo: $(hostname)" >> "$archivo"
+                echo "FQDN: $(hostname -f 2>/dev/null || hostname)" >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            5)
+                echo "=== TERMINAL ===" >> "$archivo"
+                echo "TTY actual: $(tty)" >> "$archivo"
+                echo "Tipo de terminal: $TERM" >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            6)
+                echo "=== CONFIGURACIÓN DE IDIOMA ===" >> "$archivo"
+                locale | grep -E '^LANG=|^LC_' >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            7)
+                echo "=== FECHA Y HORA ===" >> "$archivo"
+                echo "Fecha y hora actual: $(date)" >> "$archivo"
+                echo "Zona horaria: $(timedatectl show --property=Timezone --value 2>/dev/null || cat /etc/timezone 2>/dev/null || echo 'No disponible')" >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            8)
+                echo "=== INFORMACIÓN DE SESIÓN ===" >> "$archivo"
+                echo "Usuario actual: $USER (UID: $(id -u))" >> "$archivo"
+                echo "Grupos: $(groups)" >> "$archivo"
+                w $USER >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            9)
+                echo "=== INFORMACIÓN DE ARRANQUE ===" >> "$archivo"
+                echo "Último arranque: $(who -b | awk '{print $3, $4}')" >> "$archivo"
+                echo "Tiempo de actividad: $(uptime -p)" >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            10)
+                echo "=== ARQUITECTURA DEL SISTEMA ===" >> "$archivo"
+                echo "Arquitectura: $(uname -m)" >> "$archivo"
+                echo "Plataforma: $(uname -i 2>/dev/null || echo 'No disponible')" >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            11)
+                echo "=== INFORMACIÓN DE BIOS/UEFI ===" >> "$archivo"
+                if [ -r /sys/class/dmi/id/bios_date ]; then
+                    echo "Fecha BIOS: $(cat /sys/class/dmi/id/bios_date 2>/dev/null)" >> "$archivo"
+                    echo "Fabricante BIOS: $(cat /sys/class/dmi/id/bios_vendor 2>/dev/null)" >> "$archivo"
+                    echo "Versión BIOS: $(cat /sys/class/dmi/id/bios_version 2>/dev/null)" >> "$archivo"
+                else
+                    echo "Ejecutando dmidecode para obtener información de BIOS..." >> "$archivo"
+                    sudo dmidecode -t bios 2>/dev/null >> "$archivo" || echo "Se requieren permisos de administrador" >> "$archivo"
+                fi
+                echo "" >> "$archivo"
+                ;;
+            12)
+                echo "=== PLACA BASE ===" >> "$archivo"
+                if [ -r /sys/class/dmi/id/board_name ]; then
+                    echo "Nombre: $(cat /sys/class/dmi/id/board_name 2>/dev/null)" >> "$archivo"
+                    echo "Fabricante: $(cat /sys/class/dmi/id/board_vendor 2>/dev/null)" >> "$archivo"
+                    echo "Versión: $(cat /sys/class/dmi/id/board_version 2>/dev/null)" >> "$archivo"
+                else
+                    echo "Ejecutando dmidecode para obtener información de la placa base..." >> "$archivo"
+                    sudo dmidecode -t baseboard 2>/dev/null >> "$archivo" || echo "Se requieren permisos de administrador" >> "$archivo"
+                fi
+                echo "" >> "$archivo"
+                ;;
+            13)
+                echo "=== PROCESADOR (CPU) ===" >> "$archivo"
+                lscpu | grep -E 'Nombre del modelo|Model name|CPU\(s\)|Núcleo|Core|Hilo|Thread|Frecuencia|MHz' >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            14)
+                echo "=== MEMORIA DEL SISTEMA ===" >> "$archivo"
+                free -h >> "$archivo"
+                echo "" >> "$archivo"
+                echo "Información detallada de memoria:" >> "$archivo"
+                cat /proc/meminfo | grep -E '^MemTotal|^MemFree|^MemAvailable|^SwapTotal|^SwapFree' >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            15)
+                echo "=== DISCOS Y PARTICIONES ===" >> "$archivo"
+                echo "Vista en árbol de dispositivos de bloque:" >> "$archivo"
+                lsblk -f >> "$archivo"
+                echo "" >> "$archivo"
+                echo "Uso del sistema de archivos:" >> "$archivo"
+                df -h >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            16)
+                echo "=== DISPOSITIVOS PCI ===" >> "$archivo"
+                lspci >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            17)
+                echo "=== DISPOSITIVOS USB ===" >> "$archivo"
+                lsusb >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            18)
+                echo "=== INTERFACES DE RED ===" >> "$archivo"
+                ip -4 -o addr show | awk '{print $2, $4}' >> "$archivo"
+                echo "" >> "$archivo"
+                echo "Detalles completos de interfaces:" >> "$archivo"
+                ip a | grep -E '^[0-9]+:|inet ' >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            19)
+                echo "=== DIRECCIONES IP PRIVADAS ===" >> "$archivo"
+                ip addr | grep 'inet ' | grep -v '127.0.0.1' | awk '{print "Interfaz:", $NF, "- IP:", $2}' | column -t >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+            20)
+                echo "=== DIRECCIÓN IP PÚBLICA ===" >> "$archivo"
+                IP_PUBLICA=$(wget -qO- http://ipecho.net/plain 2>/dev/null || curl -s http://ipecho.net/plain 2>/dev/null)
+                if [ -n "$IP_PUBLICA" ]; then
+                    echo "Tu IP pública es: $IP_PUBLICA" >> "$archivo"
+                else
+                    echo "No se pudo obtener la IP pública. Verifica tu conexión a internet." >> "$archivo"
+                fi
+                echo "" >> "$archivo"
+                ;;
+            21)
+                echo "=== DIRECCIONES MAC ===" >> "$archivo"
+                ip link | grep -A1 '^[0-9]' | grep 'link/ether' | awk '{print "Interfaz:", prev, "- MAC:", $2} {prev=$0}' | sed 's/^[0-9]*: //' | column -t >> "$archivo"
+                echo "" >> "$archivo"
+                ;;
+        esac
+        echo -e "${Verde}✓${NC} Opción $i completada"
+    done
+    
+    echo -e "${VerdeClaro}${Negrita}✅ Informe completo guardado en: $archivo${NC}"
+    echo -e "${GrisClaro}Puedes revisar el archivo para análisis posterior.${NC}"
 }
 
 # Evaluar la opción del usuario
@@ -240,7 +413,10 @@ function evaluar_opcion {
             mostrar_encabezado_seccion "DIRECCIONES MAC" "${VerdeClaro}"
             ip link | grep -A1 '^[0-9]' | grep 'link/ether' | awk '{print "Interfaz:", prev, "- MAC:", $2} {prev=$0}' | sed 's/^[0-9]*: //' | column -t
             ;;
-        22) # Salir del script
+        22) # Ejecutar todas las opciones y guardar en archivo
+            ejecutar_todo_y_guardar
+            ;;
+        23) # Salir del script
             echo ""
             echo -e "${Verde}${Negrita}👋 ¡Gracias por usar el script de información del sistema!${NC}"
             echo -e "${GrisClaro}Saliendo...${NC}"
@@ -280,7 +456,7 @@ function main {
         evaluar_opcion
         
         # Solo hacer pausa si no es la opción de salir
-        if [ "$opcion" != "22" ]; then
+        if [ "$opcion" != "23" ]; then
             pausa
         fi
     done
