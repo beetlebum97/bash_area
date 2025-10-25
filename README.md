@@ -1,4 +1,4 @@
-# 🖥️ 1. INFO SISTEMA 
+# 🖥️ 1. SISTEMA-INFO.SH
 Script interactivo para obtener información detallada de sistemas Linux.  
 
 [![Script Preview](https://raw.githubusercontent.com/beetlebum97/bash_area/main/screenshoots/sistema-info.png)]()
@@ -9,7 +9,7 @@ Script interactivo para obtener información detallada de sistemas Linux.
   - 🟡 **Sistema (1-9):** Hostname, versión kernel, usuarios activos, etc.  
   - 🔵 **Hardware (10-17):** BIOS, placa base, CPU, memorias USB.  
   - 🟢 **Red (18-21):** Interfaces de red, conexiones activas.
-  - 🔴 **Salir (22):** Guardar informe completo en archivo.    
+  - 🔴 **Guardar informe completo en archivo. (22):** Resultados de todas las opciones.    
   - 🔴 **Salir (23):** Cierra el script.  
 
 ## ⚙️ Requisitos  
@@ -21,8 +21,9 @@ Script interactivo para obtener información detallada de sistemas Linux.
   
 ---
 
-# 🖥️ 2. CONF SISTEMA 
+# 🖥️ 2. SISTEMA-CONF.SH
 Script interactivo para obtener la configuración de sistemas Linux.  
+
 [![Script Preview](https://raw.githubusercontent.com/beetlebum97/bash_area/main/screenshoots/sistema-conf.png)]()
 
 ## 🔍 Funcionalidades  
@@ -32,12 +33,14 @@ Script interactivo para obtener la configuración de sistemas Linux.
   - 🔵 **Servicios y procesos (4-8):** Servicios, procesos, conexiones.  
   - 🟢 **Usuarios y grupos (9-12):** Usuarios, grupos, shells, logins.
   - 🟠 **Configuración avanzada (13-16):** Variables, tareas, kernel.
+  - 🔴 **Guardar informe completo en archivo. (17):** Resultados de todas las opciones.    
   - 🔴 **Salir (18):** Cierra el script.
  
  ---
 
- # 🖥️ 3. ANÁLISIS ARCHIVOS 
-Script interactivo para obtener listados de archivos y directorios por tamaño y fecha.  
+ # 🖥️ 3. ARCHIVOS.SH
+Script interactivo para obtener listados de archivos y directorios por tamaño y fecha. 
+ 
 [![Script Preview](https://raw.githubusercontent.com/beetlebum97/bash_area/main/screenshoots/archivos.png)]()
 
 ## 🔍 Funcionalidades  
