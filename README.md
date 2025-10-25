@@ -38,7 +38,7 @@ Script interactivo para obtener la configuración de sistemas Linux.
 
  # 🖥️ 3. ANÁLISIS ARCHIVOS 
 Script interactivo para obtener listados de archivos y directorios por tamaño y fecha.  
-[![Script Preview](https://raw.githubusercontent.com/beetlebum97/bash_area/main/screenashoots/archivos.png)]()
+[![Script Preview](https://raw.githubusercontent.com/beetlebum97/bash_area/main/screenshoots/archivos.png)]()
 
 ## 🔍 Funcionalidades  
 - Menú interactivo con opciones numeradas.  
